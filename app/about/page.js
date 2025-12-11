@@ -51,17 +51,17 @@ export default function AboutUs() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
-            "name": "लोंढे कृषी सेवा केंद्र",
+            "name": "श्री ॲग्रो कृषी सेवा केंद्र",
             "description": "कृषी उत्पादने, बियाणे, खते, संरक्षण साधने आणि हार्डवेअर उपलब्ध",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "कसबे तडवळे",
-              "addressLocality": "धाराशिव",
+              "streetAddress": "मराठी शाळेजवळ, बँक ऑफ बडोदा समोर सायगाव (बगळी)",
+              "addressLocality": "चाळीसगांव",
               "addressRegion": "महाराष्ट्र",
-              "postalCode": "413405",
+              "postalCode": "425102",
               "addressCountry": "IN"
             },
-            "telephone": shopData?.shop_number ? `+91${shopData.shop_number}` : "+919XXXXXXXXX",
+            "telephone": shopData?.shop_number ? `+91${shopData.shop_number}` : "+919850703747",
             "openingHours": ["Mo-Sa 09:00-19:00", "Su 09:00-13:00"],
             "priceRange": "₹₹",
             "url": typeof window !== 'undefined' ? window.location.origin : "",
