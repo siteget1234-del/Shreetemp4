@@ -1713,8 +1713,15 @@ export default function Home() {
               // Get general blogs (without selectedCrop)
               const generalBlogs = blogs.filter(blog => !blog.selectedCrop);
               
+              // Sort by date - newest first
+              const sortedBlogs = generalBlogs.sort((a, b) => {
+                const dateA = new Date(a.createdAt || 0);
+                const dateB = new Date(b.createdAt || 0);
+                return dateB - dateA; // Descending order (newest first)
+              });
+              
               // Show only latest 5 blogs
-              const latestBlogs = generalBlogs.slice(0, 5);
+              const latestBlogs = sortedBlogs.slice(0, 5);
               
               // Helper function to extract preview text
               const getPreviewText = (htmlContent, maxLength = 150) => {
