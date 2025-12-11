@@ -35,7 +35,7 @@ export default function SEO({
       <meta property=\"og:title\" content={title} />
       <meta property=\"og:description\" content={description} />
       <meta property=\"og:image\" content={`${baseUrl}${ogImage}`} />
-      <meta property=\"og:site_name\" content=\"लोंढे कृषी सेवा केंद्र\" />
+      <meta property=\"og:site_name\" content=\"श्री ॲग्रो कृषी सेवा केंद्र\" />
       <meta property=\"og:locale\" content=\"mr_IN\" />
       
       {/* Twitter */}
