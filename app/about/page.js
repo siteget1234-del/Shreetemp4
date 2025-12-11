@@ -325,7 +325,7 @@ export default function AboutUs() {
                 <Users className="w-16 h-16 text-[#177B3B] mx-auto mb-4" />
                 <h2 className="text-2xl font-bold text-gray-800 mb-3">आमची वचनबद्धता</h2>
                 <p className="text-gray-700 text-lg leading-relaxed">
-                  लोंढे कृषी सेवा केंद्र - शेतकऱ्यांच्या समृद्धीसाठी तुमचा विश्वासू भागीदार!<br />
+                  श्री ॲग्रो कृषी सेवा केंद्र - शेतकऱ्यांच्या समृद्धीसाठी तुमचा विश्वासू भागीदार!<br />
                   आम्ही शेतकऱ्यांच्या प्रत्येक गरजेची काळजी घेतो आणि त्यांच्या यशासाठी सतत प्रयत्नशील आहोत.
                 </p>
               </div>
