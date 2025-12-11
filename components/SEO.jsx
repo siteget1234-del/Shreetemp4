@@ -50,7 +50,7 @@ export default function SEO({
       <meta name=\"mobile-web-app-capable\" content=\"yes\" />
       <meta name=\"apple-mobile-web-app-capable\" content=\"yes\" />
       <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\" />
-      <meta name=\"apple-mobile-web-app-title\" content=\"लोंढे कृषी\" />
+      <meta name=\"apple-mobile-web-app-title\" content=\"श्री ॲग्रो कृषी\" />
       
       {/* Performance hints */}
       <link rel=\"dns-prefetch\" href=\"https://qdxsvknytevymbuvnpct.supabase.co\" />
