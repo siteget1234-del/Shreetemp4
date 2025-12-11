@@ -5,7 +5,14 @@ import { applyCloudinaryOptimization } from '@/lib/imageOptimization';
 
 export default function AllGeneralBlogsView({ blogs, onBack, onSelectBlog, shopData }) {
   // Filter general blogs (blogs without selectedCrop)
-  const generalBlogs = blogs.filter(blog => !blog.selectedCrop);
+  const generalBlogs = blogs
+    .filter(blog => !blog.selectedCrop)
+    .sort((a, b) => {
+      // Sort by date - newest first
+      const dateA = new Date(a.createdAt || 0);
+      const dateB = new Date(b.createdAt || 0);
+      return dateB - dateA; // Descending order (newest first)
+    });
 
   // Helper function to extract preview text from HTML
   const getPreviewText = (htmlContent, maxLength = 150) => {
