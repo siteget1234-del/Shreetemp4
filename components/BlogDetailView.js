@@ -38,8 +38,15 @@ export default function BlogDetailView({ blog, cropName, back, shopData, addToCa
   };
   const aspect = layoutAspects[blog.layout || 'standard'];
 
-  // Generate shareable blog URL
-  const blogUrl = typeof window !== 'undefined' ? `${window.location.origin}?crop=${encodeURIComponent(cropName)}&blog=${blog.id}` : '';
+  // Generate shareable blog URL - handle both crop and general blogs
+  const blogUrl = typeof window !== 'undefined' 
+    ? cropName 
+      ? `${window.location.origin}?crop=${encodeURIComponent(cropName)}&blog=${blog.id}`
+      : `${window.location.origin}?blog=${blog.id}`
+    : '';
+  
+  // Determine header title
+  const headerTitle = cropName || 'कृषी माहिती';
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
