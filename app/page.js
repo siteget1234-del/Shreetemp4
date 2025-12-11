@@ -1754,11 +1754,59 @@ export default function Home() {
               
               return (
                 <>
-                  {latestBlogs.map(blog => {
+                  {latestBlogs.map((blog, index) => {
                     const title = getBlogTitle(blog.text);
-                    const previewText = getPreviewText(blog.text);
+                    const previewText = index === 0 ? getPreviewText(blog.text, 300) : getPreviewText(blog.text);
                     const date = formatDate(blog);
                     
+                    // Latest blog (first one) gets a distinct full-width layout
+                    if (index === 0) {
+                      return (
+                        <div 
+                          key={blog.id}
+                          onClick={() => setSelectedBlog(blog)}
+                          className="bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-[1.01] active:scale-[0.99] border-2 border-[#177B3B]/20"
+                          data-testid={`general-blog-preview-${blog.id}`}
+                        >
+                          {/* Full-width Featured Image */}
+                          <div className="w-full h-64 overflow-hidden bg-gray-100">
+                            <img 
+                              src={applyCloudinaryOptimization(blog.image) || 'https://via.placeholder.com/800x400?text=Blog'} 
+                              alt={title}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          
+                          {/* Blog Content */}
+                          <div className="p-6">
+                            {/* Date Badge */}
+                            <div className="inline-block bg-[#177B3B]/10 text-[#177B3B] text-xs font-semibold px-3 py-1 rounded-full mb-3" data-testid="blog-preview-date">
+                              📅 {date}
+                            </div>
+                            
+                            {/* Title */}
+                            <h3 className="text-2xl font-bold text-gray-800 mb-3 line-clamp-2" data-testid="blog-preview-title">
+                              {title}
+                            </h3>
+                            
+                            {/* Preview Text - Extended to ~300 characters */}
+                            <p className="text-base text-gray-600 leading-relaxed mb-4 line-clamp-4" data-testid="blog-preview-text">
+                              {previewText}
+                            </p>
+                            
+                            {/* Read More Link */}
+                            <div className="flex items-center text-[#177B3B] font-bold text-base">
+                              <span>संपूर्ण वाचा</span>
+                              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    }
+                    
+                    // Other blogs keep the horizontal card layout
                     return (
                       <div 
                         key={blog.id}
