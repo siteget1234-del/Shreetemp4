@@ -1708,35 +1708,122 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {blogs.filter(blog => !blog.selectedCrop).map(blog => {
-              // Define layout aspect ratios
-              const layoutAspects = {
-                standard: 16/9,
-                portrait: 4/5,
-                square: 1,
-                wide: 21/9
+          <div className="space-y-6">
+            {(() => {
+              // Get general blogs (without selectedCrop)
+              const generalBlogs = blogs.filter(blog => !blog.selectedCrop);
+              
+              // Show only latest 5 blogs
+              const latestBlogs = generalBlogs.slice(0, 5);
+              
+              // Helper function to extract preview text
+              const getPreviewText = (htmlContent, maxLength = 150) => {
+                const text = htmlContent.replace(/<[^>]*>/g, '');
+                return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
               };
-              const aspect = layoutAspects[blog.layout || 'standard'];
+              
+              // Helper function to extract title
+              const getBlogTitle = (htmlContent) => {
+                const h1Match = htmlContent.match(/<h1[^>]*>(.*?)<\/h1>/i);
+                if (h1Match) return h1Match[1].replace(/<[^>]*>/g, '');
+                
+                const h2Match = htmlContent.match(/<h2[^>]*>(.*?)<\/h2>/i);
+                if (h2Match) return h2Match[1].replace(/<[^>]*>/g, '');
+                
+                const pMatch = htmlContent.match(/<p[^>]*>(.*?)<\/p>/i);
+                if (pMatch) {
+                  const text = pMatch[1].replace(/<[^>]*>/g, '');
+                  return text.length > 60 ? text.substring(0, 60) + '...' : text;
+                }
+                
+                const plainText = htmlContent.replace(/<[^>]*>/g, '');
+                return plainText.length > 60 ? plainText.substring(0, 60) + '...' : plainText;
+              };
+              
+              // Format date
+              const formatDate = (blog) => {
+                if (blog.createdAt) {
+                  return new Date(blog.createdAt).toLocaleDateString('mr-IN', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                  });
+                }
+                return 'नवीनतम';
+              };
               
               return (
-                <div key={blog.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 flex flex-col">
-                  <div className="relative w-full bg-gray-100" style={{ paddingBottom: `${(1 / aspect) * 100}%` }}>
-                    <img 
-                      src={applyCloudinaryOptimization(blog.image) || 'https://via.placeholder.com/400x300?text=Blog+Image'} 
-                      alt="Blog"
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  </div>
-                  <div className="p-6 flex-1">
-                    <div 
-                      className="text-gray-700 leading-relaxed blog-content"
-                      dangerouslySetInnerHTML={{ __html: blog.text }}
-                    />
-                  </div>
-                </div>
+                <>
+                  {latestBlogs.map(blog => {
+                    const title = getBlogTitle(blog.text);
+                    const previewText = getPreviewText(blog.text);
+                    const date = formatDate(blog);
+                    
+                    return (
+                      <div 
+                        key={blog.id}
+                        onClick={() => setSelectedBlog(blog)}
+                        className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer transform hover:scale-[1.02] active:scale-[0.98]"
+                        data-testid={`general-blog-preview-${blog.id}`}
+                      >
+                        <div className="flex gap-4 p-4">
+                          {/* Blog Image - Thumbnail */}
+                          <div className="flex-shrink-0 w-32 h-32 rounded-lg overflow-hidden bg-gray-100">
+                            <img 
+                              src={applyCloudinaryOptimization(blog.image) || 'https://via.placeholder.com/128x128?text=Blog'} 
+                              alt={title}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          
+                          {/* Blog Preview Content */}
+                          <div className="flex-1 flex flex-col justify-between min-w-0">
+                            {/* Title */}
+                            <h3 className="text-lg font-bold text-gray-800 line-clamp-2 mb-2" data-testid="blog-preview-title">
+                              {title}
+                            </h3>
+                            
+                            {/* Date */}
+                            <p className="text-xs text-gray-500 mb-2" data-testid="blog-preview-date">
+                              📅 {date}
+                            </p>
+                            
+                            {/* Preview Text */}
+                            <p className="text-sm text-gray-600 line-clamp-2 mb-2" data-testid="blog-preview-text">
+                              {previewText}
+                            </p>
+                            
+                            {/* Read More Link */}
+                            <div className="flex items-center text-[#177B3B] font-semibold text-sm">
+                              <span>संपूर्ण वाचा</span>
+                              <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                  
+                  {/* View All Button - Show only if there are more than 5 blogs */}
+                  {generalBlogs.length > 5 && (
+                    <div className="flex justify-center mt-8">
+                      <button
+                        onClick={() => setShowAllGeneralBlogs(true)}
+                        className="bg-gradient-to-r from-[#177B3B] to-[#01582E] hover:from-[#1a8e45] hover:to-[#016a37] text-white font-bold px-8 py-4 rounded-xl shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center space-x-2"
+                        data-testid="view-all-general-blogs-btn"
+                      >
+                        <span>सर्व माहिती पहा</span>
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    </div>
+                  )}
+                </>
               );
-            })}
+            })()}
           </div>
           
           {/* Custom Styles for Blog Content */}
