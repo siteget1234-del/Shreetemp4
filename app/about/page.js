@@ -97,13 +97,13 @@ export default function AboutUs() {
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-8">
             <div className="bg-gradient-to-r from-[#177B3B] to-[#01582E] text-white p-8 text-center">
               <h1 className="text-3xl md:text-4xl font-bold mb-3">
-                लोंढे कृषी सेवा केंद्र
+                श्री ॲग्रो कृषी सेवा केंद्र
               </h1>
               <p className="text-xl md:text-2xl text-white/90 mb-2">
-                कसबे तडवळे, धाराशिव - 413405
+                मराठी शाळेजवळ, बँक ऑफ बडोदा समोर
               </p>
               <p className="text-lg text-white/80">
-                महाराष्ट्र
+                सायगाव (बगळी) ता. चाळीसगांव जि. जळगांव, महाराष्ट्र
               </p>
             </div>
 
