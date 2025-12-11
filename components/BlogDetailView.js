@@ -62,7 +62,7 @@ export default function BlogDetailView({ blog, cropName, back, shopData, addToCa
             <span>परत</span>
           </button>
           <h1 className="text-xl font-bold" data-testid="blog-view-title">
-            {cropName}
+            {headerTitle}
           </h1>
           <div className="relative">
             <button
