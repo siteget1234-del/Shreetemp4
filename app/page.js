@@ -369,6 +369,12 @@ export default function Home() {
           setSelectedBlog(blog);
         }
       }
+    } else if (blogId && blogs.length > 0) {
+      // Handle general blog (without crop parameter)
+      const blog = blogs.find(b => b.id === blogId && !b.selectedCrop);
+      if (blog) {
+        setSelectedBlog(blog);
+      }
     }
     
     if (openCart === 'true') {
