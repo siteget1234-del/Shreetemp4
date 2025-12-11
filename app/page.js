@@ -100,7 +100,7 @@ export default function Home() {
 
   // Handle history API for all navigation states
   useEffect(() => {
-    if (selectedProduct || showSearch || selectedCategory || selectedCrop || selectedBlog || showAllCrops) {
+    if (selectedProduct || showSearch || selectedCategory || selectedCrop || selectedBlog || showAllCrops || showAllGeneralBlogs) {
       // Push a new state when any modal/view opens
       window.history.pushState({ 
         modalOpen: !!selectedProduct,
@@ -108,7 +108,8 @@ export default function Home() {
         categoryOpen: !!selectedCategory,
         cropOpen: !!selectedCrop,
         blogOpen: !!selectedBlog,
-        allCropsOpen: showAllCrops
+        allCropsOpen: showAllCrops,
+        allGeneralBlogsOpen: showAllGeneralBlogs
       }, '');
       
       const handlePopState = (event) => {
@@ -122,6 +123,8 @@ export default function Home() {
           setSelectedCrop(null);
         } else if (showAllCrops) {
           setShowAllCrops(false);
+        } else if (showAllGeneralBlogs) {
+          setShowAllGeneralBlogs(false);
         } else if (selectedCategory) {
           setSelectedCategory(null);
         } else if (showSearch) {
@@ -136,7 +139,7 @@ export default function Home() {
         window.removeEventListener('popstate', handlePopState);
       };
     }
-  }, [selectedProduct, showSearch, selectedCategory, selectedCrop, selectedBlog, showAllCrops]);
+  }, [selectedProduct, showSearch, selectedCategory, selectedCrop, selectedBlog, showAllCrops, showAllGeneralBlogs]);
 
   // Reset quantity when product changes
   useEffect(() => {
