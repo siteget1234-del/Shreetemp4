@@ -122,7 +122,7 @@ export default function BlogDetailView({ blog, cropName, back, shopData, addToCa
           <div className="relative w-full bg-gray-100" style={{ paddingBottom: `${(1 / aspect) * 100}%` }}>
             <img 
               src={applyCloudinaryOptimization(blog.image) || 'https://via.placeholder.com/400x300?text=Blog+Image'} 
-              alt={`${cropName} Blog`}
+              alt={cropName ? `${cropName} Blog` : 'Blog'}
               className="absolute inset-0 w-full h-full object-cover"
             />
           </div>
