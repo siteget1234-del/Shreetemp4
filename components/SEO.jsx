@@ -7,9 +7,9 @@ import Head from 'next/head';
  * @param {Object} props - SEO properties
  */
 export default function SEO({
-  title = 'लोंढे कृषी सेवा केंद्र - कसबे तडवळे धाराशिव',
-  description = 'कृषी उत्पादने, बियाणे, खते, संरक्षण साधने - धाराशिव, महाराष्ट्र',
-  keywords = 'कृषी, बियाणे, खते, संरक्षण साधने, धाराशिव, महाराष्ट्र, शेती, agriculture, seeds, fertilizers',
+  title = 'श्री ॲग्रो कृषी सेवा केंद्र - सायगाव (बगळी) चाळीसगांव जळगांव',
+  description = 'कृषी उत्पादने, बियाणे, खते, संरक्षण साधने - सायगाव (बगळी) ता. चाळीसगांव जि. जळगांव, महाराष्ट्र',
+  keywords = 'कृषी, बियाणे, खते, संरक्षण साधने, सायगाव, बगळी, चाळीसगांव, जळगांव, महाराष्ट्र, शेती, agriculture, seeds, fertilizers',
   ogImage = '/logo.png',
   ogType = 'website',
   canonicalUrl,
