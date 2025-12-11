@@ -1185,19 +1185,49 @@ export default function Home() {
     );
   }
 
+  // Show AllGeneralBlogsView if showAllGeneralBlogs is true
+  if (showAllGeneralBlogs) {
+    return (
+      <AllGeneralBlogsView
+        blogs={blogs}
+        onBack={() => {
+          if (window.history.state?.allGeneralBlogsOpen) {
+            window.history.back();
+          } else {
+            setShowAllGeneralBlogs(false);
+          }
+        }}
+        onSelectBlog={(blog) => {
+          setSelectedBlog(blog);
+          setShowAllGeneralBlogs(false);
+        }}
+        shopData={shopData}
+      />
+    );
+  }
+
   // Show BlogDetailView if a blog is selected
-  if (selectedBlog && selectedCrop) {
+  if (selectedBlog) {
     return (
       <BlogDetailView
         blog={selectedBlog}
         cropName={selectedCrop}
-        back={() => setSelectedBlog(null)}
+        back={() => {
+          // If from general blogs, go back to all general blogs view
+          if (!selectedCrop && !selectedBlog.selectedCrop) {
+            setSelectedBlog(null);
+            setShowAllGeneralBlogs(true);
+          } else {
+            setSelectedBlog(null);
+          }
+        }}
         shopData={shopData}
         addToCart={addToCart}
         addAllToCart={addAllToCart}
         openCart={() => {
           setSelectedBlog(null);
           setSelectedCrop(null);
+          setShowAllGeneralBlogs(false);
           setShowCart(true);
         }}
       />
